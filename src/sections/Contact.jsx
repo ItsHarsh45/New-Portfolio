@@ -2,7 +2,7 @@ import FadeContent from '../components/FadeContent/FadeContent';
 import MagnetLines from '../components/ReactBits/MagnetLines/MagnetLines';
 import Magnet from '../components/ReactBits/Magnet/Magnet';
 import ParticleCard from '../components/ReactBits/MagicBento/MagicBento';
-import { Mail, Download, ArrowUpRight } from 'lucide-react';
+import { Mail, FileText, ArrowUpRight } from 'lucide-react';
 import './Contact.css';
 
 const LinkedinIcon = ({ size = 20 }) => (
@@ -93,9 +93,9 @@ const Contact = () => {
                   href="https://drive.google.com/file/d/1W0CvWNJjz6jXUNyfrx9s3bNzLRYSmR4t/view?usp=drivesdk" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="contact__resume-btn"
+                  className="hero__btn hero__btn--secondary"
                 >
-                  <Download size={16} />
+                  <FileText size={16} />
                   Download Resume
                 </a>
                 <p className="contact__status">

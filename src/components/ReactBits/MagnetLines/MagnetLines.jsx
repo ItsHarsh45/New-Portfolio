@@ -19,32 +19,50 @@ export default function MagnetLines({
     if (!container) return;
 
     const items = container.querySelectorAll('span');
+    let cachedCenters = [];
 
-    const onPointerMove = (pointer) => {
-      items.forEach((item) => {
+    const calculateCenters = () => {
+      cachedCenters = Array.from(items).map((item) => {
         const rect = item.getBoundingClientRect();
-        const centerX = rect.x + rect.width / 2;
-        const centerY = rect.y + rect.height / 2;
-
-        const b = pointer.x - centerX;
-        const a = pointer.y - centerY;
-        const c = Math.sqrt(a * a + b * b) || 1;
-        const r = ((Math.acos(b / c) * 180) / Math.PI) * (pointer.y > centerY ? 1 : -1);
-
-        item.style.setProperty('--rotate', `${r}deg`);
+        return {
+          x: rect.x + window.scrollX + rect.width / 2,
+          y: rect.y + window.scrollY + rect.height / 2,
+        };
       });
     };
 
-    const handlePointerMove = (e) => onPointerMove({ x: e.clientX, y: e.clientY });
-    
+    calculateCenters();
+    window.addEventListener('resize', calculateCenters);
+
+    let animationFrameId = null;
+    const handlePointerMove = (e) => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(() => {
+        items.forEach((item, i) => {
+          if (!cachedCenters[i]) return;
+          const centerX = cachedCenters[i].x;
+          const centerY = cachedCenters[i].y;
+
+          const b = e.pageX - centerX;
+          const a = e.pageY - centerY;
+          const c = Math.sqrt(a * a + b * b) || 1;
+          const r = ((Math.acos(b / c) * 180) / Math.PI) * (e.pageY > centerY ? 1 : -1);
+
+          item.style.setProperty('--rotate', `${r}deg`);
+        });
+      });
+    };
+
     window.addEventListener('pointermove', handlePointerMove);
-    
+
     // Initial calculation (center of screen)
     if (items.length) {
-      onPointerMove({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+      handlePointerMove({ pageX: window.innerWidth / 2 + window.scrollX, pageY: window.innerHeight / 2 + window.scrollY });
     }
 
     return () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', calculateCenters);
       window.removeEventListener('pointermove', handlePointerMove);
     };
   }, []);

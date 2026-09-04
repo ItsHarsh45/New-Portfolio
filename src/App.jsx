@@ -6,6 +6,7 @@ import Projects from './sections/Projects';
 import Experience from './sections/Experience';
 import Contact from './sections/Contact';
 import CursorGrid from './components/ReactBits/CursorGrid/CursorGrid';
+// GooeyNav removed, using basic NavBar component
 import {
   Home,
   User,
@@ -17,41 +18,68 @@ import {
 import './App.css';
 
 const navItems = [
-  { icon: Home, label: 'Home', id: 'home' },
-  { icon: User, label: 'About', id: 'about' },
-  { icon: Layers, label: 'Skills', id: 'skills' },
-  { icon: FolderKanban, label: 'Projects', id: 'projects' },
-  { icon: Briefcase, label: 'Experience', id: 'experience' },
-  { icon: Mail, label: 'Contact', id: 'contact' },
+  { 
+    label: <><span className="nav-bar__icon-wrapper"><Home size={20} /></span><span className="nav-bar__label">Home</span></>, 
+    href: '#home' 
+  },
+  { 
+    label: <><span className="nav-bar__icon-wrapper"><User size={20} /></span><span className="nav-bar__label">About</span></>, 
+    href: '#about' 
+  },
+  { 
+    label: <><span className="nav-bar__icon-wrapper"><Layers size={20} /></span><span className="nav-bar__label">Skills</span></>, 
+    href: '#skills' 
+  },
+  { 
+    label: <><span className="nav-bar__icon-wrapper"><FolderKanban size={20} /></span><span className="nav-bar__label">Projects</span></>, 
+    href: '#projects' 
+  },
+  { 
+    label: <><span className="nav-bar__icon-wrapper"><Briefcase size={20} /></span><span className="nav-bar__label">Experience</span></>, 
+    href: '#experience' 
+  },
+  { 
+    label: <><span className="nav-bar__icon-wrapper"><Mail size={20} /></span><span className="nav-bar__label">Contact</span></>, 
+    href: '#contact' 
+  },
 ];
 
-const scrollTo = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-};
-
-function App() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+const NavBar = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const [highlightStyle, setHighlightStyle] = useState({});
-  const navInnerRef = useRef(null);
   const itemRefs = useRef([]);
 
   useEffect(() => {
-    if (hoveredIndex === null || !navInnerRef.current) {
-      setHighlightStyle((prev) => ({ ...prev, opacity: 0 }));
-      return;
+    const activeItem = itemRefs.current[activeIndex];
+    if (activeItem) {
+      setHighlightStyle({
+        width: activeItem.offsetWidth,
+        height: activeItem.offsetHeight,
+        transform: `translate(${activeItem.offsetLeft}px, ${activeItem.offsetTop}px)`,
+        opacity: 1
+      });
     }
-    const item = itemRefs.current[hoveredIndex];
-    if (!item) return;
-    const navRect = navInnerRef.current.getBoundingClientRect();
-    const itemRect = item.getBoundingClientRect();
-    setHighlightStyle({
-      width: `${itemRect.width}px`,
-      height: `${itemRect.height}px`,
-      transform: `translate(${itemRect.left - navRect.left}px, ${itemRect.top - navRect.top}px)`,
-      opacity: 1,
-    });
-  }, [hoveredIndex]);
+  }, [activeIndex]);
 
+  return (
+    <div className="nav-bar__inner">
+      <div className="nav-bar__highlight" style={highlightStyle} />
+      {items.map((item, index) => (
+        <a
+          key={index}
+          href={item.href}
+          ref={(el) => (itemRefs.current[index] = el)}
+          className={`nav-bar__item ${activeIndex === index ? 'nav-bar__item--active' : ''}`}
+          onClick={() => setActiveIndex(index)}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  );
+};
+
+function App() {
   return (
     <>
       <CursorGrid
@@ -62,37 +90,9 @@ function App() {
         gridOpacity={0.02}
         className="global-cursor-grid"
       />
-      <nav className="nav-bar" aria-label="Main navigation">
-        <div
-          className="nav-bar__inner"
-          ref={navInnerRef}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          {/* Sliding highlight */}
-          <div className="nav-bar__highlight" style={highlightStyle} />
-
-          {navItems.map((item, index) => {
-            const Icon = item.icon;
-            const isHovered = hoveredIndex === index;
-            return (
-              <button
-                key={item.id}
-                ref={(el) => (itemRefs.current[index] = el)}
-                className={`nav-bar__item ${isHovered ? 'nav-bar__item--active' : ''}`}
-                onClick={() => scrollTo(item.id)}
-                onMouseEnter={() => setHoveredIndex(index)}
-                aria-label={item.label}
-                title={item.label}
-              >
-                <span className="nav-bar__icon-wrapper">
-                  <Icon size={20} />
-                </span>
-                <span className="nav-bar__label">{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
-      </nav>
+      <div className="nav-bar">
+        <NavBar items={navItems} />
+      </div>
 
       <main>
         <Hero />

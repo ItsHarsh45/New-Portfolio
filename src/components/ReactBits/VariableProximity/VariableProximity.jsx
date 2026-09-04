@@ -19,18 +19,13 @@ function useMousePositionRef(containerRef) {
 
   useEffect(() => {
     const updatePosition = (x, y) => {
-      if (containerRef?.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        positionRef.current = { x: x - rect.left, y: y - rect.top };
-      } else {
-        positionRef.current = { x, y };
-      }
+      positionRef.current = { x, y };
     };
 
-    const handleMouseMove = ev => updatePosition(ev.clientX, ev.clientY);
+    const handleMouseMove = ev => updatePosition(ev.pageX, ev.pageY);
     const handleTouchMove = ev => {
       const touch = ev.touches[0];
-      updatePosition(touch.clientX, touch.clientY);
+      updatePosition(touch.pageX, touch.pageY);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -39,7 +34,7 @@ function useMousePositionRef(containerRef) {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [containerRef]);
+  }, []);
 
   return positionRef;
 }
@@ -62,6 +57,7 @@ const VariableProximity = forwardRef((props, ref) => {
   const interpolatedSettingsRef = useRef([]);
   const mousePositionRef = useMousePositionRef(containerRef);
   const lastPositionRef = useRef({ x: null, y: null });
+  const cachedCentersRef = useRef([]);
 
   const parsedSettings = useMemo(() => {
     const parseSettings = settingsStr =>
@@ -100,9 +96,24 @@ const VariableProximity = forwardRef((props, ref) => {
     }
   };
 
+  useEffect(() => {
+    const calculateCenters = () => {
+      cachedCentersRef.current = letterRefs.current.map(letterRef => {
+        if (!letterRef) return null;
+        const rect = letterRef.getBoundingClientRect();
+        return {
+          x: rect.left + window.scrollX + rect.width / 2,
+          y: rect.top + window.scrollY + rect.height / 2
+        };
+      });
+    };
+
+    calculateCenters();
+    window.addEventListener('resize', calculateCenters);
+    return () => window.removeEventListener('resize', calculateCenters);
+  }, [label]);
+
   useAnimationFrame(() => {
-    if (!containerRef?.current) return;
-    const containerRect = containerRef.current.getBoundingClientRect();
     const { x, y } = mousePositionRef.current;
     if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
       return;
@@ -111,16 +122,14 @@ const VariableProximity = forwardRef((props, ref) => {
 
     letterRefs.current.forEach((letterRef, index) => {
       if (!letterRef) return;
-
-      const rect = letterRef.getBoundingClientRect();
-      const letterCenterX = rect.left + rect.width / 2 - containerRect.left;
-      const letterCenterY = rect.top + rect.height / 2 - containerRect.top;
+      const center = cachedCentersRef.current[index];
+      if (!center) return;
 
       const distance = calculateDistance(
         mousePositionRef.current.x,
         mousePositionRef.current.y,
-        letterCenterX,
-        letterCenterY
+        center.x,
+        center.y
       );
 
       if (distance >= radius) {

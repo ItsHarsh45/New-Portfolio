@@ -21,30 +21,51 @@ const Magnet = ({
       return;
     }
 
-    const handleMouseMove = e => {
+    let cachedRect = null;
+    let cachedCenter = null;
+    
+    const calculateRect = () => {
       if (!magnetRef.current) return;
+      const rect = magnetRef.current.getBoundingClientRect();
+      cachedRect = { width: rect.width, height: rect.height };
+      cachedCenter = {
+        x: rect.x + window.scrollX + rect.width / 2,
+        y: rect.y + window.scrollY + rect.height / 2
+      };
+    };
 
-      const { left, top, width, height } = magnetRef.current.getBoundingClientRect();
-      const centerX = left + width / 2;
-      const centerY = top + height / 2;
+    calculateRect();
+    window.addEventListener('resize', calculateRect);
 
-      const distX = Math.abs(centerX - e.clientX);
-      const distY = Math.abs(centerY - e.clientY);
+    let animationFrameId = null;
+    const handleMouseMove = e => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(() => {
+        if (!cachedCenter || !cachedRect) return;
 
-      if (distX < width / 2 + padding && distY < height / 2 + padding) {
-        setIsActive(true);
+        const centerX = cachedCenter.x;
+        const centerY = cachedCenter.y;
+        const { width, height } = cachedRect;
 
-        const offsetX = (e.clientX - centerX) / magnetStrength;
-        const offsetY = (e.clientY - centerY) / magnetStrength;
-        setPosition({ x: offsetX, y: offsetY });
-      } else {
-        setIsActive(false);
-        setPosition({ x: 0, y: 0 });
-      }
+        const distX = Math.abs(centerX - e.pageX);
+        const distY = Math.abs(centerY - e.pageY);
+
+        if (distX < width / 2 + padding && distY < height / 2 + padding) {
+          setIsActive(true);
+          const offsetX = (e.pageX - centerX) / magnetStrength;
+          const offsetY = (e.pageY - centerY) / magnetStrength;
+          setPosition({ x: offsetX, y: offsetY });
+        } else {
+          setIsActive(false);
+          setPosition(prev => (prev.x === 0 && prev.y === 0 ? prev : { x: 0, y: 0 }));
+        }
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', calculateRect);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [padding, disabled, magnetStrength]);
