@@ -1,0 +1,129 @@
+/* ---------- App Layout — Modern ---------- */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.global-cursor-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ---------- Bottom Nav Bar ---------- */
+.nav-bar {
+  position: fixed;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+.nav-bar__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px;
+  background: rgba(17, 17, 17, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Sliding highlight pill */
+.nav-bar__highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-dim);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s ease,
+              opacity 0.2s ease;
+  will-change: transform, width, height, opacity;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nav-bar__item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 14px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-bar__item--active {
+  color: var(--color-text-heading);
+}
+
+/* Icon wrapper — scale + glow on hover */
+.nav-bar__icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.3s ease;
+}
+
+.nav-bar__item--active .nav-bar__icon-wrapper {
+  transform: scale(1.2) translateY(-1px);
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+}
+
+/* Label — slide up animation on hover */
+.nav-bar__label {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.2s ease;
+}
+
+.nav-bar__item--active .nav-bar__label {
+  transform: translateY(-1px);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  padding: var(--space-8) var(--space-6) calc(var(--space-8) + 80px);
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-1);
+}
+
+.footer__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .nav-bar__label {
+    display: none;
+  }
+  
+  .nav-bar__item {
+    padding: 10px;
+  }
+}

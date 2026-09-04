@@ -1,0 +1,84 @@
+/* ---------- Magic Bento — ParticleCard ---------- */
+.particle-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-1);
+  overflow: hidden;
+  transition: border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              transform 0.3s ease;
+
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 250px;
+  --glow-color: 59, 130, 246;
+}
+
+.particle-card:hover {
+  border-color: rgba(var(--glow-color), 0.35);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
+              0 0 20px rgba(var(--glow-color), 0.08);
+}
+
+/* Internal glow overlay that follows the cursor */
+.particle-card__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+    rgba(var(--glow-color), calc(0.12 * var(--glow-intensity))),
+    transparent 70%
+  );
+}
+
+.particle-card:hover .particle-card__glow {
+  opacity: 1;
+}
+
+/* Border glow — a faint colored border glow on hover */
+.particle-card__border-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    400px circle at var(--glow-x) var(--glow-y),
+    rgba(var(--glow-color), 0.25),
+    transparent 60%
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  padding: 1px;
+}
+
+.particle-card:hover .particle-card__border-glow {
+  opacity: 1;
+}
+
+/* Content wrapper */
+.particle-card__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Particle elements */
+.particle-card .particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  will-change: transform, opacity;
+}

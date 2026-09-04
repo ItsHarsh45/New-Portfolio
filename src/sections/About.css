@@ -1,0 +1,156 @@
+/* ---------- About — Modern Clean ---------- */
+
+/* Bio Card (inside ParticleCard) */
+.about__bio-particle {
+  margin-bottom: var(--space-10);
+}
+
+.about__bio-card {
+  padding: var(--space-8);
+}
+
+.about__bio-text {
+  color: var(--color-text-body);
+  font-size: var(--text-base);
+  line-height: 1.8;
+  margin-bottom: var(--space-4);
+  max-width: none;
+}
+
+.about__bio-text:last-child {
+  margin-bottom: 0;
+}
+
+.about__bio-text strong {
+  color: var(--color-text-heading);
+  font-weight: 600;
+}
+
+/* Stats Row */
+.about__stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
+  padding: var(--space-6) 0;
+}
+
+.about__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.about__stat-number {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  color: var(--color-accent);
+  letter-spacing: -0.02em;
+}
+
+.about__stat-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.about__stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--color-border);
+}
+
+/* Section Label */
+.about__section-label {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-4);
+}
+
+/* Education */
+.about__edu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.about__edu-particle {
+  height: 100%;
+}
+
+.about__edu-card {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  align-items: flex-start;
+  height: 100%;
+}
+
+.about__edu-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-dim);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent);
+}
+
+.about__edu-icon--purple {
+  background: var(--color-purple-dim);
+  color: var(--color-purple);
+}
+
+.about__edu-body { flex: 1; min-width: 0; }
+
+.about__edu-degree {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-heading);
+  margin-bottom: 2px;
+}
+
+.about__edu-school {
+  font-size: var(--text-sm);
+  color: var(--color-text-body);
+  margin-bottom: var(--space-2);
+}
+
+.about__edu-meta {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  flex-wrap: wrap;
+}
+
+.about__edu-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.about__edu-score {
+  color: var(--color-accent) !important;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .about__edu-grid { grid-template-columns: 1fr; }
+  .about__stats-row { gap: var(--space-6); }
+  .about__stat-number { font-size: var(--text-2xl); }
+  .about__bio-card { padding: var(--space-6); }
+}
+
+@media (max-width: 480px) {
+  .about__stats-row { flex-direction: column; gap: var(--space-4); }
+  .about__stat-divider { width: 40px; height: 1px; }
+}

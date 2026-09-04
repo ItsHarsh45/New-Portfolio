@@ -1,0 +1,202 @@
+/* ---------- Contact — Modern Clean ---------- */
+.contact {
+  padding-bottom: calc(var(--section-padding) + 100px);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact__magnet-bg {
+  z-index: 0;
+}
+
+.contact__content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* ParticleCard wrapper */
+.contact__particle-card {
+  /* ParticleCard handles border, bg, glow */
+}
+
+.contact__card-inner {
+  padding: var(--space-8);
+}
+
+/* Links */
+.contact__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.contact__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color var(--duration-normal),
+              box-shadow var(--duration-normal),
+              transform var(--duration-normal);
+}
+
+.contact__link:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent), var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.contact__link-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-dim);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.contact__link-icon--blue {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+}
+
+.contact__link-icon--gray {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-heading);
+}
+
+.contact__link-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact__link-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact__link-value {
+  font-size: var(--text-sm);
+  color: var(--color-text-heading);
+  font-weight: 500;
+}
+
+.contact__arrow {
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: opacity var(--duration-fast),
+              color var(--duration-fast);
+  flex-shrink: 0;
+}
+
+.contact__link:hover .contact__arrow {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+/* CTA */
+.contact__magnet-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.contact__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-border);
+}
+
+.contact__resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.8rem 2rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-base);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  color: var(--color-text-title);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  transition: all var(--duration-normal) ease;
+  cursor: pointer;
+}
+
+.contact__resume-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+/* Bounce-down animation for the Download icon */
+.contact__resume-btn svg {
+  animation: downloadBounce 2s ease-in-out infinite;
+}
+
+@keyframes downloadBounce {
+  0%, 100% { transform: translateY(0); }
+  20% { transform: translateY(3px); }
+  40% { transform: translateY(0); }
+}
+
+.contact__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.contact__status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  position: relative;
+}
+
+.contact__status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.4;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  70% { transform: scale(2); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+  .contact__card-inner {
+    padding: var(--space-6) var(--space-4);
+  }
+}
+
+@media (max-width: 768px) {
+  .contact__card-inner { padding: var(--space-6); }
+  .contact__link { flex-wrap: wrap; }
+}
