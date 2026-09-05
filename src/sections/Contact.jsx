@@ -1,5 +1,4 @@
 import FadeContent from '../components/FadeContent/FadeContent';
-import MagnetLines from '../components/ReactBits/MagnetLines/MagnetLines';
 import Magnet from '../components/ReactBits/Magnet/Magnet';
 import ParticleCard from '../components/ReactBits/MagicBento/MagicBento';
 import { Mail, FileText, ArrowUpRight } from 'lucide-react';
@@ -20,16 +19,6 @@ const GithubIcon = ({ size = 20 }) => (
 const Contact = () => {
   return (
     <section id="contact" className="section contact" aria-label="Contact">
-      <MagnetLines
-        rows={15}
-        columns={15}
-        containerSize="100%"
-        lineColor="rgba(255,255,255,0.03)"
-        lineWidth="1px"
-        lineHeight="20px"
-        baseAngle={0}
-        className="contact__magnet-bg"
-      />
       <div className="container container--narrow contact__content-wrapper">
         <FadeContent>
           <h2 className="section__title">Get In Touch</h2>

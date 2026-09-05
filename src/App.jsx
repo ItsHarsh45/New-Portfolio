@@ -5,7 +5,6 @@ import Skills from './sections/Skills';
 import Projects from './sections/Projects';
 import Experience from './sections/Experience';
 import Contact from './sections/Contact';
-import CursorGrid from './components/ReactBits/CursorGrid/CursorGrid';
 // GooeyNav removed, using basic NavBar component
 import {
   Home,
@@ -82,14 +81,6 @@ const NavBar = ({ items }) => {
 function App() {
   return (
     <>
-      <CursorGrid
-        color="#3B82F6"
-        maxOpacity={0.4}
-        radius={150}
-        fadeDuration={1000}
-        gridOpacity={0.02}
-        className="global-cursor-grid"
-      />
       <div className="nav-bar">
         <NavBar items={navItems} />
       </div>

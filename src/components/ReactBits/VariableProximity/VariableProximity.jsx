@@ -1,9 +1,10 @@
-import { forwardRef, useMemo, useRef, useEffect } from 'react';
+import { forwardRef, useMemo, useRef, useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import './VariableProximity.css';
 
-function useAnimationFrame(callback) {
+function useAnimationFrame(callback, enabled = true) {
   useEffect(() => {
+    if (!enabled) return;
     let frameId;
     const loop = () => {
       callback();
@@ -11,7 +12,7 @@ function useAnimationFrame(callback) {
     };
     frameId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameId);
-  }, [callback]);
+  }, [callback, enabled]);
 }
 
 function useMousePositionRef(containerRef) {
@@ -58,6 +59,18 @@ const VariableProximity = forwardRef((props, ref) => {
   const mousePositionRef = useMousePositionRef(containerRef);
   const lastPositionRef = useRef({ x: null, y: null });
   const cachedCentersRef = useRef([]);
+  const internalRef = useRef(null);
+  const [isInView, setIsInView] = useState(true);
+
+  useEffect(() => {
+    const el = internalRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsInView(entry.isIntersecting);
+    }, { threshold: 0 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const parsedSettings = useMemo(() => {
     const parseSettings = settingsStr =>
@@ -114,6 +127,8 @@ const VariableProximity = forwardRef((props, ref) => {
   }, [label]);
 
   useAnimationFrame(() => {
+    if (!isInView) return;
+
     const { x, y } = mousePositionRef.current;
     if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
       return;
@@ -148,14 +163,18 @@ const VariableProximity = forwardRef((props, ref) => {
       interpolatedSettingsRef.current[index] = newSettings;
       letterRef.style.fontVariationSettings = newSettings;
     });
-  });
+  }, isInView);
 
   const words = label.split(' ');
   let letterIndex = 0;
 
   return (
     <span
-      ref={ref}
+      ref={el => {
+        internalRef.current = el;
+        if (typeof ref === 'function') ref(el);
+        else if (ref) ref.current = el;
+      }}
       className={`${className} variable-proximity`}
       onClick={onClick}
       style={{ display: 'inline', ...style }}

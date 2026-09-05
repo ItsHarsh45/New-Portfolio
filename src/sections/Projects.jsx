@@ -30,14 +30,17 @@ const projectsData = [
     links: { github: '#', demo: '#' }
   },
   {
-    title: 'iKya — Teen Wellness Platform',
+    title: 'My Harmony — Teen Wellness Platform',
     tech: ['ReactJS', 'Firebase', 'Llama 3.2'],
     description:
       'Built interactive health tools and integrated AI-powered insights using Llama 3.2, Stable Diffusion, and Hugging Face models for empathetic chat support and therapeutic art generation.',
     color: '#8B5CF6',
     glowRgb: '139, 92, 246',
     label: 'Web + AI',
-    links: { github: '#', demo: '#' }
+    links: {
+      github: 'https://github.com/ItsHarsh45/My_Harmony',
+      demo: 'https://myharmony.netlify.app/'
+    }
   },
   {
     title: 'Online Game Store',
@@ -47,7 +50,9 @@ const projectsData = [
     color: '#22C55E',
     glowRgb: '34, 197, 94',
     label: 'Database / Backend',
-    links: { github: '#' }
+    links: {
+      github: 'https://github.com/ItsHarsh45/updated-gamestore'
+    }
   },
 ];
 

@@ -5,23 +5,15 @@
   flex-direction: column;
 }
 
-.global-cursor-grid {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 9999;
-}
-
 /* ---------- Bottom Nav Bar ---------- */
 .nav-bar {
   position: fixed;
   bottom: var(--space-4);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0);
+  will-change: transform;
   z-index: 50;
+  contain: layout style;
 }
 
 .nav-bar__inner {

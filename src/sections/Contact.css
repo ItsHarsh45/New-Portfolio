@@ -5,10 +5,6 @@
   overflow: hidden;
 }
 
-.contact__magnet-bg {
-  z-index: 0;
-}
-
 .contact__content-wrapper {
   position: relative;
   z-index: 1;

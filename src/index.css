@@ -121,6 +121,8 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
   color: var(--color-text-body);
   line-height: 1.7;
   overflow-x: hidden;
@@ -175,6 +177,8 @@ a:hover {
 .section {
   padding: var(--section-padding) 0;
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }
 
 .section__title {
