@@ -60,6 +60,38 @@ const NavBar = ({ items }) => {
     }
   }, [activeIndex]);
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = `#${entry.target.id}`;
+          const index = items.findIndex(item => item.href === id);
+          if (index !== -1) {
+            setActiveIndex(index);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    items.forEach(item => {
+      const targetId = item.href.substring(1);
+      const element = document.getElementById(targetId);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [items]);
+
   return (
     <div className="nav-bar__inner">
       <div className="nav-bar__highlight" style={highlightStyle} />
