@@ -42,7 +42,7 @@ const Hero = () => {
 
         <h1 className="hero__title">
           <VariableProximity
-            label="DATA ANALYST BUILDING TOWARD DATA SCIENCE"
+            label={"DATA ANALYST\nBUILDING\nTOWARD DATA SCIENCE"}
             fromFontVariationSettings="'wght' 300"
             toFontVariationSettings="'wght' 900"
             radius={200}

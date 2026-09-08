@@ -165,7 +165,7 @@ const VariableProximity = forwardRef((props, ref) => {
     });
   }, isInView);
 
-  const words = label.split(' ');
+  const lines = label.split('\n');
   let letterIndex = 0;
 
   return (
@@ -180,29 +180,38 @@ const VariableProximity = forwardRef((props, ref) => {
       style={{ display: 'inline', ...style }}
       {...restProps}
     >
-      {words.map((word, wordIndex) => (
-        <span key={wordIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-          {word.split('').map(letter => {
-            const currentLetterIndex = letterIndex++;
-            return (
-              <motion.span
-                key={currentLetterIndex}
-                ref={el => {
-                  letterRefs.current[currentLetterIndex] = el;
-                }}
-                style={{
-                  display: 'inline-block',
-                  fontVariationSettings: interpolatedSettingsRef.current[currentLetterIndex]
-                }}
-                aria-hidden="true"
-              >
-                {letter}
-              </motion.span>
-            );
-          })}
-          {wordIndex < words.length - 1 && <span style={{ display: 'inline-block' }}>&nbsp;</span>}
-        </span>
-      ))}
+      {lines.map((line, lineIndex) => {
+        const words = line.trim().split(/\s+/).filter(Boolean);
+        return (
+          <span key={lineIndex} style={{ display: 'block', whiteSpace: 'nowrap' }}>
+            {words.map((word, wordIndex) => (
+              <span key={wordIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+                {word.split('').map(letter => {
+                  const currentLetterIndex = letterIndex++;
+                  return (
+                    <motion.span
+                      key={currentLetterIndex}
+                      ref={el => {
+                        letterRefs.current[currentLetterIndex] = el;
+                      }}
+                      style={{
+                        display: 'inline-block',
+                        fontVariationSettings: interpolatedSettingsRef.current[currentLetterIndex]
+                      }}
+                      aria-hidden="true"
+                    >
+                      {letter}
+                    </motion.span>
+                  );
+                })}
+                {wordIndex < words.length - 1 && (
+                  <span style={{ display: 'inline-block' }}>&nbsp;</span>
+                )}
+              </span>
+            ))}
+          </span>
+        );
+      })}
       <span className="sr-only">{label}</span>
     </span>
   );
