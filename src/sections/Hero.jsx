@@ -42,7 +42,7 @@ const Hero = () => {
 
         <h1 className="hero__title">
           <VariableProximity
-            label="DATA ANALYST & DEVELOPER"
+            label="DATA ANALYST BUILDING TOWARD DATA SCIENCE"
             fromFontVariationSettings="'wght' 300"
             toFontVariationSettings="'wght' 900"
             radius={200}
@@ -56,7 +56,7 @@ const Hero = () => {
             text={[
               "Python · Pandas · SQL",
               "Power BI · DAX · Excel",
-              "React · Javascript · HTML",
+              "Data Cleaning · EDA · Data Analysis",
               "Building actionable insights from raw data."
             ]}
             typingSpeed={60}

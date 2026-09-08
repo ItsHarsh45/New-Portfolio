@@ -25,10 +25,10 @@ const About = () => {
           >
             <div className="about__bio-card">
               <p className="about__bio-text">
-                <strong>Call me Harsh.</strong> I'm a Computer Science graduate (CGPA: 8.06) from Atria Institute of Technology, currently focused on Data Analytics and building things that actually work. My main toolkit is <strong>Python</strong>, <strong>Pandas</strong>, and <strong>SQL</strong> I enjoy turning messy data into something useful, finding patterns, answering questions, and building analysis from scratch.
+                Call me Harsh. I'm a Computer Science graduate (CGPA: 8.06) from Atria Institute of Technology, focused on Data Analytics and working toward Data Science. My core tools are Python, Pandas, and SQL, which I use to clean, explore, and analyze data, uncover patterns, and turn raw datasets into meaningful insights. I enjoy breaking down ambiguous questions, finding what the data can actually tell us, and building analysis that leads to clear conclusions.
               </p>
               <p className="about__bio-text">
-                I've also built web applications during engineering, mainly with <strong>ReactJS</strong>. It's been a couple of years since I worked with it seriously, but give me an idea, AI, and a few hours of vibe coding, and I'll probably build something surprisingly decent like this portfolio. 😄 I'm currently looking for opportunities where I can learn fast, solve real problems, and grow in the data field, with <strong>Data Science</strong> as the direction I'm working toward.
+                I also have a background in software development, including building web applications with ReactJS, and understand the software development lifecycle from requirements and planning to development, testing, deployment, and iteration. This gave me an engineering mindset for breaking down problems and taking projects from an idea to a working solution. I'm now applying that mindset to data while strengthening my skills in statistics, machine learning, and analytical problem-solving. I'm looking for an entry-level Data Analyst opportunity where I can work with real data, solve meaningful problems, and build the experience needed to grow into Data Science.
               </p>
             </div>
           </ParticleCard>

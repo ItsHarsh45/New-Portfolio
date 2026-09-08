@@ -14,7 +14,6 @@ const skillCategories = [
     skills: [
       { name: 'SQL', node: 'SQL' },
       { name: 'PostgreSQL', node: 'PostgreSQL' },
-      { name: 'MySQL', node: 'MySQL' },
       { name: 'Python', node: 'Python' },
       { name: 'Pandas', node: 'Pandas' },
       { name: 'NumPy', node: 'NumPy' },
@@ -63,7 +62,6 @@ const skillCategories = [
       { name: 'Supabase', node: 'Supabase' },
       { name: 'Git', node: 'Git' },
       { name: 'GitHub', node: 'GitHub' },
-      { name: 'REST APIs', node: 'REST APIs' },
     ],
   },
 ];
@@ -87,7 +85,7 @@ const Skills = () => {
                   {cat.icon}
                   <h3>{cat.title}</h3>
                 </div>
-                
+
                 <div className="skills__logoloop-wrapper">
                   <LogoLoop
                     logos={cat.skills}
