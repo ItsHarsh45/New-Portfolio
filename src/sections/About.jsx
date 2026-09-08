@@ -25,10 +25,10 @@ const About = () => {
           >
             <div className="about__bio-card">
               <p className="about__bio-text">
-                <strong>Call me Harsh.</strong> I'm a Computer Science graduate (CGPA: 8.06) from Atria Institute of Technology, currently focused on Data Analytics and building things that actually work. My main toolkit is <strong>Python</strong>, <strong>Pandas</strong>, and <strong>SQL</strong> — I enjoy turning messy data into something useful, finding patterns, answering questions, and building analysis from scratch.
+                <strong>Call me Harsh.</strong> I'm a Computer Science graduate (CGPA: 8.06) from Atria Institute of Technology, currently focused on Data Analytics and building things that actually work. My main toolkit is <strong>Python</strong>, <strong>Pandas</strong>, and <strong>SQL</strong> I enjoy turning messy data into something useful, finding patterns, answering questions, and building analysis from scratch.
               </p>
               <p className="about__bio-text">
-                I've also built web applications during engineering, mainly with <strong>ReactJS</strong>. It's been a couple of years since I worked with it seriously, but give me an idea, AI, and a few hours of vibe coding, and I'll probably build something surprisingly decent — like this portfolio. 😄 I'm currently looking for opportunities where I can learn fast, solve real problems, and grow in the data field, with <strong>Data Science</strong> as the direction I'm working toward.
+                I've also built web applications during engineering, mainly with <strong>ReactJS</strong>. It's been a couple of years since I worked with it seriously, but give me an idea, AI, and a few hours of vibe coding, and I'll probably build something surprisingly decent like this portfolio. 😄 I'm currently looking for opportunities where I can learn fast, solve real problems, and grow in the data field, with <strong>Data Science</strong> as the direction I'm working toward.
               </p>
             </div>
           </ParticleCard>
