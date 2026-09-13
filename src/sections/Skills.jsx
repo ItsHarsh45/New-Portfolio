@@ -45,6 +45,7 @@ const skillCategories = [
     skills: [
       { name: 'DBMS', node: 'DBMS' },
       { name: 'OOP', node: 'OOP' },
+      { name: 'DSA', node: 'DSA' },
       { name: 'Operating Systems', node: 'OS' },
       { name: 'Computer Networks', node: 'Networks' },
     ],
