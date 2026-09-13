@@ -13,7 +13,6 @@ const skillCategories = [
     speed: 40,
     skills: [
       { name: 'SQL', node: 'SQL' },
-      { name: 'PostgreSQL', node: 'PostgreSQL' },
       { name: 'Python', node: 'Python' },
       { name: 'Pandas', node: 'Pandas' },
       { name: 'NumPy', node: 'NumPy' },
