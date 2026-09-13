@@ -38,16 +38,16 @@ const skillCategories = [
   },
   {
     id: 'dev',
-    title: 'DEVELOPMENT',
+    title: 'CS FUNDAMENTALS',
     icon: <Code2 size={16} />,
     color: '#22C55E',
     direction: 'left',
     speed: 45,
     skills: [
-      { name: 'React', node: 'React' },
-      { name: 'JavaScript', node: 'JavaScript' },
-      { name: 'HTML / CSS', node: 'HTML / CSS' },
-      { name: 'Python', node: 'Python Scripts' },
+      { name: 'DBMS', node: 'DBMS' },
+      { name: 'OOP', node: 'OOP' },
+      { name: 'Operating Systems', node: 'OS' },
+      { name: 'Computer Networks', node: 'Networks' },
     ],
   },
   {
