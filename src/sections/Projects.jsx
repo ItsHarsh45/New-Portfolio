@@ -27,7 +27,7 @@ const projectsData = [
     glowRgb: '59, 130, 246',
     label: 'Data Analytics',
     featured: true,
-    links: { github: '#', demo: '#' }
+    links: { github: 'https://github.com/ItsHarsh45/customer-trends-data-analysis-SQL-Python-PowerBI'}
   },
   {
     title: 'My Harmony — Teen Wellness Platform',
