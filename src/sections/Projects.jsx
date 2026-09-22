@@ -20,7 +20,7 @@ const ExternalLinkIcon = ({ size = 20 }) => (
 const projectsData = [
   {
     title: 'Retail Customer Analytics Pipeline',
-    tech: ['Python', 'PostgreSQL', 'Power BI'],
+    tech: ['Python', 'MySQL', 'Power BI'],
     description:
       'End-to-end retail customer behavior analytics pipeline. Performed data cleaning and EDA using Python (Pandas), wrote advanced SQL queries with CTEs and window functions, and built an interactive Power BI dashboard for stakeholder reporting.',
     color: '#3B82F6',
